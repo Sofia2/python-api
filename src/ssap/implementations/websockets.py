@@ -201,7 +201,8 @@ class WebsocketBasedSSAPEndpoint(SSAPEndpoint):
         '''
         if (len(data.data) == 1):
             return # We might receive some shit after closing the connection. We won't process it.
-        self.__logger.debug("Data received: " + data.data)
+        self.__logger.debug("Data received: ")
+        self.__logger.debug(data.data)
         parsed_message = _SSAPMessageParser.parse(data.data)
         
         # The message content can be modified within the callback. We must copy

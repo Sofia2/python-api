@@ -21,8 +21,15 @@ In order to use this API, you must have `pip` installed in your system. The pip 
 Once `pip` is installed, you will be able to install the Python API into your local package repository by running the following command:
 
 ```
-python setup.py
+pip install -r requirements.txt
+
+python setup.py install
 ```
+
+Example for query:
+
+\python-api\src\ssap\tests\websockets\queries.py
+
 
 ## Contact information
 
