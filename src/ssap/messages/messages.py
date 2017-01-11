@@ -349,7 +349,22 @@ class _SSAPMessageParser(object):
             # Some ssap messages have a string (and therefore non-json) body. In that case, we'll have to
             # parse it too.
             if(jsonMessage["messageType"] == SSAP_MESSAGE_TYPE.INDICATION) :
+                patched_data = jsonMessage["body"] = six.b(jsonMessage["body"]).replace(b"\"[", b"[").replace(b"]\"", b"]")
+
+                patched_data = patched_data.replace(b" ", b"")
+                patched_data = patched_data.replace(b'"{', b'{')
+                patched_data = patched_data.replace(b'}"', b'}')
+                #patched_data = patched_data.replace(b'" :', b'":')
+                jsonMessage["body"]=patched_data
+                print("Dato\n")
+                print(jsonMessage["body"])
+
+
+            if(jsonMessage["messageType"] == SSAP_MESSAGE_TYPE.SUBSCRIBE) :
+                print("Mensage")
+
                 jsonMessage["body"] = six.b(jsonMessage["body"]).replace(b"\"[", b"[").replace(b"]\"", b"]")
+                print(jsonMessage["body"])
                 
             jsonMessage["body"] = json.loads(bytes2String(jsonMessage["body"]))
         
